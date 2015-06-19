@@ -41,5 +41,6 @@ RUN git clone --depth 1 https://github.com/zedshaw/mongrel2.git \
  && cd / && rm -rf mongrel2*
 
 VOLUME /config
+VOLUME /var/www
 
 EXPOSE 80
