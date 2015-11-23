@@ -1,0 +1,14 @@
+[Unit]
+Description=Main Mongrel2 front server
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill -s SIGTERM m2
+ExecStartPre=-/usr/bin/docker rm m2
+ExecStartPre=/usr/bin/docker pull localhost:5000/docker-mongrel2
+ExecStart=/usr/bin/docker run --name m2 --volumes-from m2_config -p 80:8080 localhost:5000/docker-mongrel2
+
+[Install]
+WantedBy=multi-user.target
